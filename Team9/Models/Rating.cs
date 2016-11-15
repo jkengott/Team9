@@ -19,6 +19,8 @@ namespace Team9.Models
 
         public Int32  RatingValue { get; set; }
 
+        public AppUser User { get; set; }
+
         public virtual Song RatingSong { get; set; }
 
         public virtual Artist RatingArtist { get; set; }

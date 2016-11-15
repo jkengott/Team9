@@ -61,3 +61,5 @@ C:\Users\MSBStudent\Documents\Visual Studio 2015\Projects\Team9\Team9\obj\Debug\
 C:\Users\MSBStudent\Documents\Visual Studio 2015\Projects\Team9\Team9\obj\Debug\Team9.pdb
 C:\Users\MSBStudent\documents\visual studio 2015\Projects\Team9\Team9\obj\Debug\Team9.Migrations.Team90.resources
 C:\Users\MSBStudent\documents\visual studio 2015\Projects\Team9\Team9\obj\Debug\Team9.csproj.GenerateResource.Cache
+C:\Users\MSBStudent\documents\visual studio 2015\Projects\Team9\Team9\obj\Debug\Team9.Migrations.Team91.resources
+C:\Users\MSBStudent\documents\visual studio 2015\Projects\Team9\Team9\obj\Debug\Team9.Migrations.Team92.resources

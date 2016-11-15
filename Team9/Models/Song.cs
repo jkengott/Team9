@@ -22,7 +22,7 @@ namespace Team9.Models
         [Required(ErrorMessage = "Please enter a valid length")]
         public Decimal SongLength { get; set; }
 
-        public virtual Genre SongGenre { get; set; }
+        public virtual List<Genre> SongGenre { get; set; }
 
         [Required(ErrorMessage = "Please enter a valid artist")]
         public virtual List<Artist> SongArtist { get; set; }

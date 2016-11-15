@@ -17,7 +17,7 @@ namespace Team9.Models
         public String AlbumName { get; set; }
 
         [Required(ErrorMessage = "Please enter a valid genre")]
-        public virtual Genre AlbumGenre { get; set; }
+        public virtual List<Genre> AlbumGenre { get; set; }
 
         [Required(ErrorMessage = "Please enter a valid price")]
         public Decimal AlbumPrice { get; set; }

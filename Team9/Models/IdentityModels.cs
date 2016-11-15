@@ -13,8 +13,8 @@ namespace Team9.Models
     {
         //TODO: Put any additional fields that you need for your users here
         //For example:
-        //public String FName { get; set; }
-        //public String LName { get; set; }
+        public string FName { get; set; }
+        public string LName { get; set; }
         public string CreditCard1 { get; set; }
         public enum CCType
         {
@@ -56,5 +56,11 @@ namespace Team9.Models
         
         //Add dbSet for roles
          public DbSet<AppRole> AppRoles { get; set; }
+
+        public System.Data.Entity.DbSet<Team9.Models.Artist> Artists { get; set; }
+
+        public System.Data.Entity.DbSet<Team9.Models.Album> Albums { get; set; }
+
+        public System.Data.Entity.DbSet<Team9.Models.Song> Songs { get; set; }
     }
 }

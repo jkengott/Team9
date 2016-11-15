@@ -11,7 +11,7 @@ namespace Team9.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "Songs");
         }
     }
 }

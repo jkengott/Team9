@@ -39,6 +39,14 @@ namespace Team9.Models
         public string ConfirmPassword { get; set; }
 
         //TODO: Add additional fields to register users here.
+        public string FName { get; set; }
+        public string LName { get; set; }
+        public string CreditCard1 { get; set; }
+        public AppUser.CCType CCType1 { get; set; }
+        public string CreditCard2 { get; set; }
+        public AppUser.CCType CCType2 { get; set; }
+        public string SSN { get; set; }
+
     }
 
     public class ChangePasswordViewModel
