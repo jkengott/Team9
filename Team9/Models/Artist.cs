@@ -21,8 +21,6 @@ namespace Team9.Models
         public virtual Genre ArtistGenre { get; set; }
 
         public virtual List<Song> Songs { get; set; }
-        
-        public virtual List<Album> Albums { get; set; }
 
         public virtual List<Rating> ArtistRatings { get; set; }
 

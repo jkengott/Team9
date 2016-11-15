@@ -13,7 +13,7 @@ namespace Team9.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201611151518142_Team9.0"; }
+            get { return "201611152004029_Team9.0"; }
         }
         
         string IMigrationMetadata.Source

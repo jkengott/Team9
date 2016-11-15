@@ -153,10 +153,13 @@ namespace Team9.Migrations
                         ArtistID = c.Int(nullable: false, identity: true),
                         ArtistName = c.String(nullable: false),
                         ArtistGenre_GenreID = c.Int(nullable: false),
+                        Album_AlbumID = c.Int(),
                     })
                 .PrimaryKey(t => t.ArtistID)
                 .ForeignKey("dbo.Genres", t => t.ArtistGenre_GenreID, cascadeDelete: true)
-                .Index(t => t.ArtistGenre_GenreID);
+                .ForeignKey("dbo.Albums", t => t.Album_AlbumID)
+                .Index(t => t.ArtistGenre_GenreID)
+                .Index(t => t.Album_AlbumID);
             
             CreateTable(
                 "dbo.Genres",
@@ -187,19 +190,6 @@ namespace Team9.Migrations
                 .Index(t => t.RatingSong_SongID);
             
             CreateTable(
-                "dbo.ArtistAlbums",
-                c => new
-                    {
-                        Artist_ArtistID = c.Int(nullable: false),
-                        Album_AlbumID = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => new { t.Artist_ArtistID, t.Album_AlbumID })
-                .ForeignKey("dbo.Artists", t => t.Artist_ArtistID, cascadeDelete: true)
-                .ForeignKey("dbo.Albums", t => t.Album_AlbumID, cascadeDelete: true)
-                .Index(t => t.Artist_ArtistID)
-                .Index(t => t.Album_AlbumID);
-            
-            CreateTable(
                 "dbo.ArtistSongs",
                 c => new
                     {
@@ -222,6 +212,7 @@ namespace Team9.Migrations
             DropForeignKey("dbo.PurchaseItems", "PurchaseItemSong_SongID", "dbo.Songs");
             DropForeignKey("dbo.Songs", "SongAlbum_AlbumID", "dbo.Albums");
             DropForeignKey("dbo.Albums", "AlbumGenre_GenreID", "dbo.Genres");
+            DropForeignKey("dbo.Artists", "Album_AlbumID", "dbo.Albums");
             DropForeignKey("dbo.ArtistSongs", "Song_SongID", "dbo.Songs");
             DropForeignKey("dbo.ArtistSongs", "Artist_ArtistID", "dbo.Artists");
             DropForeignKey("dbo.Ratings", "RatingSong_SongID", "dbo.Songs");
@@ -229,8 +220,6 @@ namespace Team9.Migrations
             DropForeignKey("dbo.Ratings", "RatingAlbum_AlbumID", "dbo.Albums");
             DropForeignKey("dbo.Artists", "ArtistGenre_GenreID", "dbo.Genres");
             DropForeignKey("dbo.Songs", "SongGenre_GenreID", "dbo.Genres");
-            DropForeignKey("dbo.ArtistAlbums", "Album_AlbumID", "dbo.Albums");
-            DropForeignKey("dbo.ArtistAlbums", "Artist_ArtistID", "dbo.Artists");
             DropForeignKey("dbo.PurchaseItems", "Purchase_PurchaseID", "dbo.Purchases");
             DropForeignKey("dbo.Purchases", "GiftUser_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
@@ -238,11 +227,10 @@ namespace Team9.Migrations
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropIndex("dbo.ArtistSongs", new[] { "Song_SongID" });
             DropIndex("dbo.ArtistSongs", new[] { "Artist_ArtistID" });
-            DropIndex("dbo.ArtistAlbums", new[] { "Album_AlbumID" });
-            DropIndex("dbo.ArtistAlbums", new[] { "Artist_ArtistID" });
             DropIndex("dbo.Ratings", new[] { "RatingSong_SongID" });
             DropIndex("dbo.Ratings", new[] { "RatingArtist_ArtistID" });
             DropIndex("dbo.Ratings", new[] { "RatingAlbum_AlbumID" });
+            DropIndex("dbo.Artists", new[] { "Album_AlbumID" });
             DropIndex("dbo.Artists", new[] { "ArtistGenre_GenreID" });
             DropIndex("dbo.Albums", new[] { "AlbumGenre_GenreID" });
             DropIndex("dbo.Songs", new[] { "SongAlbum_AlbumID" });
@@ -259,7 +247,6 @@ namespace Team9.Migrations
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropTable("dbo.ArtistSongs");
-            DropTable("dbo.ArtistAlbums");
             DropTable("dbo.Ratings");
             DropTable("dbo.Genres");
             DropTable("dbo.Artists");

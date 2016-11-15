@@ -169,7 +169,9 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -181,9 +183,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201611151518142_Team9.0.cs" />
-    <Compile Include="Migrations\201611151518142_Team9.0.Designer.cs">
-      <DependentUpon>201611151518142_Team9.0.cs</DependentUpon>
+    <Compile Include="Migrations\201611152004029_Team9.0.cs" />
+    <Compile Include="Migrations\201611152004029_Team9.0.Designer.cs">
+      <DependentUpon>201611152004029_Team9.0.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Artist.cs" />
@@ -224,8 +226,8 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201611151518142_Team9.0.resx">
-      <DependentUpon>201611151518142_Team9.0.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201611152004029_Team9.0.resx">
+      <DependentUpon>201611152004029_Team9.0.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
