@@ -5,10 +5,10 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
 
-//TODO: Change the using statement here to match your project's name
-using IdentityTemplate.Models;
+//XXTODO: Change the using statement here to match your project's name
+using Team9.Models;
 
-namespace IdentityTemplate
+namespace Team9
 {
     public partial class Startup
     {

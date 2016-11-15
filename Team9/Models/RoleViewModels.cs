@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-//TODO: Change the namespace here to match your project's name
-namespace IdentityTemplate.Models
+//TODOXX: Change the namespace here to match your project's name
+namespace Team9.Models
 {
     public class RoleEditModel
     {

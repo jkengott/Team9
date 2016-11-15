@@ -19,9 +19,13 @@ namespace Team9.Models
 
         public DateTime PurchaseDate { get; set; }
 
+        public bool isGift { get; set; }
+
+        public virtual AppUser GiftUser { get; set; }
+
         public virtual List<PurchaseItem> PurchaseItems { get; set; }
 
-        public virtual AppUser {get; set;}
+        public virtual AppUser PurchaseUser { get; set; }
 
 
 

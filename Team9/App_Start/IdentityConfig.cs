@@ -11,10 +11,10 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 
-//TODO: Change the using statement here to match your project's name
-using IdentityTemplate.Models;
+//XXTODO: Change the using statement here to match your project's name
+using Team9.Models;
 
-namespace IdentityTemplate
+namespace Team9
 {
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
     public class AppUserManager : UserManager<AppUser>
@@ -34,7 +34,7 @@ namespace IdentityTemplate
                 RequireUniqueEmail = true  //NOTE: This is the line of code that only allows one account per email
             };
 
-            // TODO: Configure validation logic for passwords - what are the rules for your passwords?
+            // XXTODO: Configure validation logic for passwords - what are the rules for your passwords?
             manager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,

@@ -3,9 +3,10 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
 
-//TODO: Change the namespace here to match your project's name
-namespace IdentityTemplate.Models
+//TODOXX: Change the namespace here to match your project's name
+namespace Team9.Models
 {
     // You can add profile data for the user by adding more properties to your AppUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class AppUser : IdentityUser
@@ -14,6 +15,17 @@ namespace IdentityTemplate.Models
         //For example:
         //public String FName { get; set; }
         //public String LName { get; set; }
+        public string CreditCard1 { get; set; }
+        public enum CCType
+        {
+            Visa, American_Express, Discover, Mastercard
+        }
+        public CCType CCType1 { get; set; }
+        public string CreditCard2 { get; set; }
+        public CCType CCType2 { get; set; }
+        public string SSN { get; set; }
+
+        public virtual List<Purchase> Purchases { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<AppUser> manager)
         {

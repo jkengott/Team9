@@ -13,6 +13,7 @@ namespace Team9.Models
 
         public virtual  Song PurchaseItemSong { get; set; }
 
+        public virtual Purchase Purchase { get; set; }
 
     }
 }

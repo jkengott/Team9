@@ -1,5 +1,5 @@
-﻿//TODO: Change the using statement here to match your project's name
-using IdentityTemplate.Models;
+﻿//TODOXX: Change the using statement here to match your project's name
+using Team9.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
-//TODO: Change the namespace here to match your project's name
-namespace IdentityTemplate.Controllers
+//TODOXX: Change the namespace here to match your project's name
+namespace Team9.Controllers
 {
     [Authorize]
     public class AccountController : Controller
