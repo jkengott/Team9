@@ -39,9 +39,10 @@
         @foreach (var item in Model.AlbumArtist)
         {
             <tr>
-                <td>@Html.DisplayFor(modelItem => item.ArtistName)</td>
+                <td>@Html.ActionLink(item.ArtistName, "Details", "Artists", new { Id = item.ArtistID }, null)</td>                
             </tr>
         }
+
     </table>
 </div>
 
@@ -56,6 +57,7 @@
         {
             <tr>
                 <td>@Html.DisplayFor(modelItem => item.GenreName)</td>
+
             </tr>
         }
     </table>
@@ -71,7 +73,7 @@
         @foreach (var item in Model.Songs)
         {
             <tr>
-                <td>@Html.DisplayFor(modelItem => item.SongName)</td>
+                <td>@Html.ActionLink(item.SongName, "Details", "Songs", new { Id = item.SongID }, null)</td>
             </tr>
         }
     </table>
@@ -81,16 +83,12 @@
     <table class="table table-bordered">
         <tr>
             <th>
-                Album Rating
-            </th>
-            <th>
                 Album Comments
             </th>
         </tr>
         @foreach (var item in Model.AlbumRatings)
         {
             <tr>
-                <td>@Html.DisplayFor(modelItem => item.RatingValue)</td>
                 <td>@Html.DisplayFor(modelItem => item.RatingText)</td>
 
             </tr>
