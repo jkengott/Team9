@@ -28,6 +28,79 @@
 
     </dl>
 </div>
+
+<div>
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                Album Artist(s)
+            </th>
+        </tr>
+        @foreach (var item in Model.AlbumArtist)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.ArtistName)</td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div>
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                 Album Genre
+            </th>
+        </tr>
+        @foreach (var item in Model.AlbumGenre)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.GenreName)</td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div>
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                Album Songs
+            </th>
+        </tr>
+        @foreach (var item in Model.Songs)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.SongName)</td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div>
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                Album Rating
+            </th>
+            <th>
+                Album Comments
+            </th>
+        </tr>
+        @foreach (var item in Model.AlbumRatings)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.RatingValue)</td>
+                <td>@Html.DisplayFor(modelItem => item.RatingText)</td>
+
+            </tr>
+        }
+    </table>
+</div>
+
+
+
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.AlbumID }) |
     @Html.ActionLink("Back to List", "Index")
