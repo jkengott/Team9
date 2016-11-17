@@ -7,12 +7,39 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Team9.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace Team9.Controllers
 {
     public class SongsController : Controller
     {
         private AppDbContext db = new AppDbContext();
+
+        public Decimal getAverageRating(int? id)
+        {
+            Decimal count = 0;
+            Decimal total = 0;
+            Decimal average;
+
+            Song song = db.Songs.Find(id);
+            foreach(Rating r in song.SongRatings)
+            {
+                count += 1;
+                total += r.RatingValue;
+            }
+            if (count == 0)
+            {
+                average = 0;
+            }
+            else
+            {
+                average = total / count;
+            }
+
+            return average;
+        }
 
         // GET: Songs
         public ActionResult Index()
@@ -28,11 +55,52 @@ namespace Team9.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Song song = db.Songs.Find(id);
+            ViewBag.AverageSongRating = getAverageRating(id);
             if (song == null)
             {
                 return HttpNotFound();
             }
             return View(song);
+        }
+
+
+        // POST: AddToCart
+        [HttpPost, ActionName("AddToCart")]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddToCart(int id)
+        {
+            var query = from p in db.Purchases
+                        where p.isPurchased == false && p.PurchaseUser.Id == User.Identity.GetUserId()
+                        select p;
+
+            Purchase NewPurchase = new Purchase();
+            Song song = db.Songs.Find(id);
+            List<Purchase> PurchaseList = new List<Purchase>();
+            PurchaseItem newItem = new PurchaseItem();
+            PurchaseList = query.ToList();
+            if (PurchaseList != null)
+            {
+                NewPurchase = PurchaseList[0];
+
+                //TODO: IF for discounted price
+                newItem.PurchaseItemPrice = song.SongPrice;
+                newItem.PurchaseItemSong = song;
+                newItem.Purchase = NewPurchase;
+                db.PurchaseItems.Add(newItem);
+            }
+            else
+            {
+                db.Purchases.Add(NewPurchase);
+                PurchaseList = query.ToList();
+                NewPurchase = PurchaseList[0];
+                //TODO: IF for discounted price
+                newItem.PurchaseItemPrice = song.SongPrice;
+                newItem.PurchaseItemSong = song;
+                newItem.Purchase = NewPurchase;
+                db.PurchaseItems.Add(newItem);
+            }
+
+            return RedirectToAction("Index", "Purchases");
         }
 
         // GET: Songs/Create

@@ -62,5 +62,15 @@ namespace Team9.Models
         public System.Data.Entity.DbSet<Team9.Models.Album> Albums { get; set; }
 
         public System.Data.Entity.DbSet<Team9.Models.Song> Songs { get; set; }
+
+        public System.Data.Entity.DbSet<Team9.Models.Purchase> Purchases { get; set; }
+
+        public System.Data.Entity.DbSet<Team9.Models.PurchaseItem> PurchaseItems { get; set; }
+
+        public System.Data.Entity.DbSet<Team9.Models.Genre> Genres { get; set; }
+
+        public System.Data.Entity.DbSet<Team9.Models.Rating> Ratings { get; set; }
+
+
     }
 }

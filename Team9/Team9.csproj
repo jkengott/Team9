@@ -190,6 +190,7 @@
     <Compile Include="Controllers\AlbumsController.cs" />
     <Compile Include="Controllers\ArtistsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PurchasesController.cs" />
     <Compile Include="Controllers\RoleAdminController.cs" />
     <Compile Include="Controllers\SongsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -206,6 +207,14 @@
     <Compile Include="Migrations\201611152043192_Team9.2.cs" />
     <Compile Include="Migrations\201611152043192_Team9.2.Designer.cs">
       <DependentUpon>201611152043192_Team9.2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611171745474_Team9.3.cs" />
+    <Compile Include="Migrations\201611171745474_Team9.3.Designer.cs">
+      <DependentUpon>201611171745474_Team9.3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611171924257_Team9.4.cs" />
+    <Compile Include="Migrations\201611171924257_Team9.4.Designer.cs">
+      <DependentUpon>201611171924257_Team9.4.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Artist.cs" />
@@ -251,6 +260,11 @@
     <Content Include="Views\Songs\Details.cshtml" />
     <Content Include="Views\Songs\Edit.cshtml" />
     <Content Include="Views\Songs\Index.cshtml" />
+    <Content Include="Views\Purchases\Create.cshtml" />
+    <Content Include="Views\Purchases\Delete.cshtml" />
+    <Content Include="Views\Purchases\Details.cshtml" />
+    <Content Include="Views\Purchases\Edit.cshtml" />
+    <Content Include="Views\Purchases\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -270,6 +284,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611152043192_Team9.2.resx">
       <DependentUpon>201611152043192_Team9.2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611171745474_Team9.3.resx">
+      <DependentUpon>201611171745474_Team9.3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611171924257_Team9.4.resx">
+      <DependentUpon>201611171924257_Team9.4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

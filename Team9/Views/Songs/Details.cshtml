@@ -34,7 +34,71 @@
             @Html.DisplayFor(model => model.SongLength)
         </dd>
 
+        <dt>
+            Average Rating
+        </dt>
+
+        <dd>
+            @ViewBag.AverageSongRating
+        </dd>
+
     </dl>
+</div>
+<div>
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                Song Artist(s)
+            </th>
+        </tr>
+        @foreach (var item in Model.SongArtist)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.ArtistName)</td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div>
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                Song Genre
+            </th>
+        </tr>
+        @foreach (var item in Model.SongGenre)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.GenreName)</td>
+            </tr>
+        }
+    </table>
+</div>
+
+
+<div>
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                Song Rating
+            </th>
+            <th>
+                Song Comments
+            </th>
+        </tr>
+        @foreach (var item in Model.SongRatings)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.RatingValue)</td>
+                <td>@Html.DisplayFor(modelItem => item.RatingText)</td>
+
+            </tr>
+        }
+    </table>
+</div>
+<div>
+    @Html.ActionLink("Add to Cart", "AddToCart", "Songs", new { id = Model.SongID }, new { @class = "btn btn-success" })
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.SongID }) |
