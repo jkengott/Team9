@@ -220,6 +220,18 @@
     <Compile Include="Migrations\201611172156360_Team9.5.Designer.cs">
       <DependentUpon>201611172156360_Team9.5.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611172230143_Team9.6.cs" />
+    <Compile Include="Migrations\201611172230143_Team9.6.Designer.cs">
+      <DependentUpon>201611172230143_Team9.6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611172236056_Team9.7.cs" />
+    <Compile Include="Migrations\201611172236056_Team9.7.Designer.cs">
+      <DependentUpon>201611172236056_Team9.7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611172248501_Team9.8.cs" />
+    <Compile Include="Migrations\201611172248501_Team9.8.Designer.cs">
+      <DependentUpon>201611172248501_Team9.8.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Artist.cs" />
     <Compile Include="Models\Album.cs" />
@@ -297,6 +309,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611172156360_Team9.5.resx">
       <DependentUpon>201611172156360_Team9.5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611172230143_Team9.6.resx">
+      <DependentUpon>201611172230143_Team9.6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611172236056_Team9.7.resx">
+      <DependentUpon>201611172236056_Team9.7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611172248501_Team9.8.resx">
+      <DependentUpon>201611172248501_Team9.8.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

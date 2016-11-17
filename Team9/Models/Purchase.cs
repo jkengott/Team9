@@ -17,7 +17,7 @@ namespace Team9.Models
 
         public bool isPurchased { get; set; }
 
-        public DateTime PurchaseDate { get; set; }
+        public DateTime? PurchaseDate { get; set; }
 
         public bool isGift { get; set; }
 

@@ -93,6 +93,7 @@ namespace Team9.Controllers
                 NewPurchase.PurchaseUser = db.Users.Find(CurrentUserId);
                 NewPurchase.isPurchased = false;
                 db.Purchases.Add(NewPurchase);
+                db.SaveChanges();
                 PurchaseList = query.ToList();
                 NewPurchase = PurchaseList[0];
 
