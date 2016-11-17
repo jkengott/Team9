@@ -25,5 +25,6 @@ namespace Team9.Models
 
         public virtual List<Rating> ArtistRatings { get; set; }
 
+        public virtual List<Album> ArtistAlbums { get; set; }
     }
 }

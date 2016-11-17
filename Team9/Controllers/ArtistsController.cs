@@ -27,7 +27,10 @@ namespace Team9.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            // find artist id
             Artist artist = db.Artists.Find(id);
+            // viewbag for average artist rating
+            ViewBag.AverageArtistRating = getAverageRating(id);
             if (artist == null)
             {
                 return HttpNotFound();
@@ -113,6 +116,31 @@ namespace Team9.Controllers
             db.Artists.Remove(artist);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        // gets the average rating for an artist
+        public Decimal getAverageRating(int? id)
+        {
+            Decimal count = 0;
+            Decimal total = 0;
+            Decimal average;
+
+            Artist artist = db.Artists.Find(id);
+            foreach (Rating r in artist.ArtistRatings)
+            {
+                count += 1;
+                total += r.RatingValue;
+            }
+            if (count == 0)
+            {
+                average = 0;
+            }
+            else
+            {
+                average = total / count;
+            }
+
+            return average;
         }
 
         protected override void Dispose(bool disposing)
