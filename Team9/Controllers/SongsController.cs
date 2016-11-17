@@ -63,14 +63,14 @@ namespace Team9.Controllers
             return View(song);
         }
 
-
         // POST: AddToCart
-        [HttpPost, ActionName("AddToCart")]
-        [ValidateAntiForgeryToken]
-        public ActionResult AddToCart(int id)
+        //[HttpPost, ActionName("addToCart")]
+        //[ValidateAntiForgeryToken]
+        public ActionResult addToCart(int id)
         {
+            String CurrentUserId = User.Identity.GetUserId();
             var query = from p in db.Purchases
-                        where p.isPurchased == false && p.PurchaseUser.Id == User.Identity.GetUserId()
+                        where p.isPurchased == false && p.PurchaseUser.Id == CurrentUserId
                         select p;
 
             Purchase NewPurchase = new Purchase();
@@ -78,7 +78,7 @@ namespace Team9.Controllers
             List<Purchase> PurchaseList = new List<Purchase>();
             PurchaseItem newItem = new PurchaseItem();
             PurchaseList = query.ToList();
-            if (PurchaseList != null)
+            if (PurchaseList.Count() == 1)
             {
                 NewPurchase = PurchaseList[0];
 
@@ -90,9 +90,12 @@ namespace Team9.Controllers
             }
             else
             {
+                NewPurchase.PurchaseUser = db.Users.Find(CurrentUserId);
+                NewPurchase.isPurchased = false;
                 db.Purchases.Add(NewPurchase);
                 PurchaseList = query.ToList();
                 NewPurchase = PurchaseList[0];
+
                 //TODO: IF for discounted price
                 newItem.PurchaseItemPrice = song.SongPrice;
                 newItem.PurchaseItemSong = song;
