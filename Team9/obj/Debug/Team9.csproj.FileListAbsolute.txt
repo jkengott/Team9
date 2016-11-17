@@ -130,3 +130,5 @@ C:\Users\Student\Documents\GitHub\Team9\Team9\obj\Debug\Team9.dll
 C:\Users\Student\Documents\GitHub\Team9\Team9\obj\Debug\Team9.pdb
 C:\Users\MSBStudent\Documents\Visual Studio 2015\Projects\Team9\Team9\obj\Debug\Team9.Migrations.Team93.resources
 C:\Users\MSBStudent\Documents\Visual Studio 2015\Projects\Team9\Team9\obj\Debug\Team9.Migrations.Team94.resources
+C:\Users\Student\Documents\GitHub\Team9\Team9\obj\Debug\Team9.Migrations.Team93.resources
+C:\Users\Student\Documents\GitHub\Team9\Team9\obj\Debug\Team9.Migrations.Team94.resources
