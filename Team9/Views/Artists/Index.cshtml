@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Team9.Models.Artist>
+    @using Team9.Models
 
 @{
     ViewBag.Title = "Index";
@@ -12,15 +13,29 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ArtistName)
+            Artist Name
         </th>
-        <th></th>
+        <th>
+            Artist Genre
+        </th>
+        <th>
+            Artist Rating
+        </th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.ArtistName)
+        </td>
+        <td>
+            @foreach (Genre g in item.ArtistGenre)
+            {
+                <span>@g.GenreName *</span>
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ArtistRatings)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ArtistID }) |
