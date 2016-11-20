@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Team9.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Team9.Controllers
 {
@@ -60,6 +61,79 @@ namespace Team9.Controllers
             }
             return View(album);
         }
+
+        //GET: Add to cart
+        // TODO: set up role requirements
+        public ActionResult addAlbumToCart(int id)
+        {
+            String CurrentUserId = User.Identity.GetUserId();
+            var query = from p in db.Purchases
+                        where p.isPurchased == false && p.PurchaseUser.Id == CurrentUserId
+                        select p;
+
+            Purchase NewPurchase = new Purchase();
+            Album album = db.Albums.Find(id);
+            List<Purchase> PurchaseList = new List<Purchase>();
+            PurchaseList = query.ToList();
+            if (PurchaseList.Count() == 1)
+            {
+                NewPurchase = PurchaseList[0];
+
+                //TODOXX: IF for discounted price
+                //newItem.PurchaseItemPrice = song.SongPrice;
+                foreach (Song s in album.Songs)
+                {
+                    PurchaseItem newItem = new PurchaseItem();
+                    if (s.DiscountPrice.Equals(null))
+                {
+                    newItem.PurchaseItemPrice = s.SongPrice;
+                }
+                else
+                {
+                    newItem.PurchaseItemPrice = s.DiscountPrice;
+                }
+                newItem.PurchaseItemSong = s;
+                newItem.Purchase = NewPurchase;
+                db.PurchaseItems.Add(newItem);
+                db.SaveChanges();
+                }
+            }
+            else
+            {
+                NewPurchase.PurchaseUser = db.Users.Find(CurrentUserId);
+                NewPurchase.isPurchased = false;
+                db.Purchases.Add(NewPurchase);
+                db.SaveChanges();
+                PurchaseList = query.ToList();
+                NewPurchase = PurchaseList[0];
+
+                //TODOXX: IF for discounted price
+
+                foreach (Song s in album.Songs)
+                {
+                    PurchaseItem newItem = new PurchaseItem();
+                    if (s.DiscountPrice.Equals(null))
+                    {
+                        newItem.PurchaseItemPrice = s.SongPrice;
+                    }
+                    else
+                    {
+                        newItem.PurchaseItemPrice = s.DiscountPrice;
+                    }
+                    newItem.PurchaseItemSong = s;
+                    newItem.Purchase = NewPurchase;
+                    db.PurchaseItems.Add(newItem);
+                    db.SaveChanges();
+                }
+            }
+
+            return RedirectToAction("Index", "Purchases");
+        }
+
+
+
+
+
 
         // GET: Albums/Create
         public ActionResult Create()

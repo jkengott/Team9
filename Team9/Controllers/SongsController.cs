@@ -66,7 +66,8 @@ namespace Team9.Controllers
         // POST: AddToCart
         //[HttpPost, ActionName("addToCart")]
         //[ValidateAntiForgeryToken]
-        public ActionResult addToCart(int id)
+        //TODO: Add role validation
+        public ActionResult addSongToCart(int id)
         {
             String CurrentUserId = User.Identity.GetUserId();
             var query = from p in db.Purchases
@@ -83,10 +84,19 @@ namespace Team9.Controllers
                 NewPurchase = PurchaseList[0];
 
                 //TODO: IF for discounted price
-                newItem.PurchaseItemPrice = song.SongPrice;
+                //newItem.PurchaseItemPrice = song.SongPrice;
+                if (song.DiscountPrice.Equals(null))
+                {
+                    newItem.PurchaseItemPrice = song.SongPrice;
+                }
+                else
+                {
+                    newItem.PurchaseItemPrice = song.DiscountPrice;
+                }
                 newItem.PurchaseItemSong = song;
                 newItem.Purchase = NewPurchase;
                 db.PurchaseItems.Add(newItem);
+                db.SaveChanges();
             }
             else
             {
@@ -98,10 +108,18 @@ namespace Team9.Controllers
                 NewPurchase = PurchaseList[0];
 
                 //TODO: IF for discounted price
-                newItem.PurchaseItemPrice = song.SongPrice;
+                if (song.DiscountPrice.Equals(null))
+                {
+                    newItem.PurchaseItemPrice = song.SongPrice;
+                }
+                else
+                {
+                    newItem.PurchaseItemPrice = song.DiscountPrice;
+                }
                 newItem.PurchaseItemSong = song;
                 newItem.Purchase = NewPurchase;
                 db.PurchaseItems.Add(newItem);
+                db.SaveChanges();
             }
 
             return RedirectToAction("Index", "Purchases");
