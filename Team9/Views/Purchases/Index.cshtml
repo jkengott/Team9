@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Team9.Models.Purchase>
+﻿@model IEnumerable<Team9.Models.PurchaseItem>
 
 @{
     ViewBag.Title = "Index";
@@ -12,28 +12,44 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.isPurchased)
+            @Html.DisplayNameFor(model => model.PurchaseItemSong.SongName )
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PurchaseDate)
+            @Html.DisplayNameFor(model => model.PurchaseItemSong.SongAlbum )
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.isGift)
+            @Html.DisplayNameFor(model => model.PurchaseItemSong.SongArtist )
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PurchaseItemSong.SongGenre )
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PurchaseItemPrice )
+        </th>
+  
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.isPurchased)
+            @Html.DisplayFor(modelItem => item.PurchaseItemSong.SongName )
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.PurchaseDate)
+            @Html.DisplayFor(modelItem => item.PurchaseItemSong.SongAlbum )
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.isGift)
+            @Html.DisplayFor(modelItem => item.PurchaseItemSong.SongArtist )
         </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PurchaseItemSong.SongGenre )
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PurchaseItemPrice)
+        </td>
+
+
+
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.PurchaseID }) |
             @Html.ActionLink("Details", "Details", new { id=item.PurchaseID }) |
