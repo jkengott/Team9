@@ -10,133 +10,109 @@ using Team9.Models;
 
 namespace Team9.Controllers
 {
-
-    public class AlbumsController : Controller
+    public class RatingsController : Controller
     {
         private AppDbContext db = new AppDbContext();
 
-        public Decimal getAverageRating(int? id)
-        {
-            Decimal count = 0;
-            Decimal total = 0;
-            Decimal average;
-
-            Album Album = db.Albums.Find(id);
-            foreach (Rating r in Album.AlbumRatings)
-            {
-                count += 1;
-                total += r.RatingValue;
-            }
-            if (count == 0)
-            {
-                average = 0;
-            }
-            else
-            {
-                average = total / count;
-            }
-
-            return average;
-        }
-
-        // GET: Albums
+        // GET: Ratings
         public ActionResult Index()
         {
-            return View(db.Albums.ToList());
+            return View(db.Ratings.ToList());
         }
 
-        // GET: Albums/Details/5
+        // GET: Ratings/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Album album = db.Albums.Find(id);
-            ViewBag.AverageAlbumRating = getAverageRating(id);
-            if (album == null)
+            Rating rating = db.Ratings.Find(id);
+            if (rating == null)
             {
                 return HttpNotFound();
             }
-            return View(album);
+            return View(rating);
         }
 
-        // GET: Albums/Create
+        // GET: Ratings/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Albums/Create
+        // POST: Ratings/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AlbumID,AlbumName,AlbumPrice")] Album album)
+        public ActionResult Create([Bind(Include = "RatingID,RatingText,RatingValue")] Rating rating, int? id)
         {
+            Album RatedAlbum;
             if (ModelState.IsValid)
             {
-                db.Albums.Add(album);
+                
+                db.Ratings.Add(rating);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(album);
+            return View(rating);
         }
 
-        // GET: Albums/Edit/5
+        // GET: Ratings/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Album album = db.Albums.Find(id);
-            if (album == null)
+            Rating rating = db.Ratings.Find(id);
+            if (rating == null)
             {
                 return HttpNotFound();
             }
-            return View(album);
+            return View(rating);
         }
 
-        // POST: Albums/Edit/5
+        // POST: Ratings/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AlbumID,AlbumName,AlbumPrice")] Album album)
+        public ActionResult Edit([Bind(Include = "RatingID,RatingText,RatingValue")] Rating rating)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(album).State = EntityState.Modified;
+                db.Entry(rating).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(album);
+            return View(rating);
         }
 
-        // GET: Albums/Delete/5
+        // GET: Ratings/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Album album = db.Albums.Find(id);
-            if (album == null)
+            Rating rating = db.Ratings.Find(id);
+            if (rating == null)
             {
                 return HttpNotFound();
             }
-            return View(album);
+            return View(rating);
         }
 
-        // POST: Albums/Delete/5
+        // POST: Ratings/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Album album = db.Albums.Find(id);
-            db.Albums.Remove(album);
+            Rating rating = db.Ratings.Find(id);
+            db.Ratings.Remove(rating);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
