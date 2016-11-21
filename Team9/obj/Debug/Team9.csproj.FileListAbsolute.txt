@@ -205,3 +205,4 @@ C:\Users\MSBStudent\documents\visual studio 2015\Projects\Team9\Team9\obj\Debug\
 C:\Users\Clay Kelly\Documents\GitHub\Team9\Team9\obj\Debug\Team9.Migrations.Team96.resources
 C:\Users\Clay Kelly\Documents\GitHub\Team9\Team9\obj\Debug\Team9.Migrations.Team97.resources
 C:\Users\Clay Kelly\Documents\GitHub\Team9\Team9\obj\Debug\Team9.Migrations.Team98.resources
+C:\Users\MSBStudent\documents\visual studio 2015\Projects\Team9\Team9\obj\Debug\Team9.Migrations.Team99.resources

@@ -109,7 +109,7 @@ namespace Team9.Controllers
 
                     //TODOXX: IF for discounted price
                     //newItem.PurchaseItemPrice = song.SongPrice;
-                    if (song.DiscountPrice.Equals(null))
+                    if (!song.isDiscoutned)
                     {
                         newItem.PurchaseItemPrice = song.SongPrice;
                     }
@@ -132,7 +132,7 @@ namespace Team9.Controllers
                     NewPurchase = PurchaseList[0];
 
                     //TODOXX: IF for discounted price
-                    if (song.DiscountPrice.Equals(null))
+                    if (!song.isDiscoutned)
                     {
                         newItem.PurchaseItemPrice = song.SongPrice;
                     }
