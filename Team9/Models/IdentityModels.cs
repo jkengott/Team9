@@ -18,7 +18,7 @@ namespace Team9.Models
         public string CreditCard1 { get; set; }
         public enum CCType
         {
-            Visa, American_Express, Discover, Mastercard
+            Visa, American_Express, Discover, Mastercard, None
         }
         public CCType CCType1 { get; set; }
         public string CreditCard2 { get; set; }
