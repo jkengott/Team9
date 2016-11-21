@@ -24,6 +24,9 @@ namespace Team9.Models
         public string CreditCard2 { get; set; }
         public CCType CCType2 { get; set; }
         public string SSN { get; set; }
+        public string City { get; set; }
+        public string StreeAddress { get; set; }
+        public string Zip { get; set; }
 
         public virtual List<Purchase> Purchases { get; set; }
 
