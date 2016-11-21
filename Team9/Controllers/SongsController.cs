@@ -17,6 +17,22 @@ namespace Team9.Controllers
     {
         private AppDbContext db = new AppDbContext();
 
+        public bool hasPurchased(int id)
+        {
+            String CurrentUserId = User.Identity.GetUserId();
+            var query = from p in db.Purchases
+                        join pi in db.PurchaseItems on p.PurchaseID equals pi.Purchase.PurchaseID
+                        where p.isPurchased == false && p.PurchaseUser.Id == CurrentUserId
+                        select pi.PurchaseItemSong.SongID;
+
+            List<Int32> SongIDs = query.ToList();
+            if (SongIDs.Contains(id))
+            {
+                return true;
+            }
+            return false;
+        }
+
         public Decimal getAverageRating(int? id)
         {
             Decimal count = 0;
@@ -79,50 +95,59 @@ namespace Team9.Controllers
             List<Purchase> PurchaseList = new List<Purchase>();
             PurchaseItem newItem = new PurchaseItem();
             PurchaseList = query.ToList();
-            if (PurchaseList.Count() == 1)
-            {
-                NewPurchase = PurchaseList[0];
 
-                //TODO: IF for discounted price
-                //newItem.PurchaseItemPrice = song.SongPrice;
-                if (song.DiscountPrice.Equals(null))
-                {
-                    newItem.PurchaseItemPrice = song.SongPrice;
-                }
-                else
-                {
-                    newItem.PurchaseItemPrice = song.DiscountPrice;
-                }
-                newItem.PurchaseItemSong = song;
-                newItem.Purchase = NewPurchase;
-                db.PurchaseItems.Add(newItem);
-                db.SaveChanges();
+            //Check if theyve purchased before
+            if (hasPurchased(id))
+            {
+                //TODO: Add error Message?
             }
             else
             {
-                NewPurchase.PurchaseUser = db.Users.Find(CurrentUserId);
-                NewPurchase.isPurchased = false;
-                db.Purchases.Add(NewPurchase);
-                db.SaveChanges();
-                PurchaseList = query.ToList();
-                NewPurchase = PurchaseList[0];
-
-                //TODO: IF for discounted price
-                if (song.DiscountPrice.Equals(null))
+                if (PurchaseList.Count() == 1)
                 {
-                    newItem.PurchaseItemPrice = song.SongPrice;
+                    NewPurchase = PurchaseList[0];
+
+                    //TODOXX: IF for discounted price
+                    //newItem.PurchaseItemPrice = song.SongPrice;
+                    if (song.DiscountPrice.Equals(null))
+                    {
+                        newItem.PurchaseItemPrice = song.SongPrice;
+                    }
+                    else
+                    {
+                        newItem.PurchaseItemPrice = song.DiscountPrice;
+                    }
+                    newItem.PurchaseItemSong = song;
+                    newItem.Purchase = NewPurchase;
+                    db.PurchaseItems.Add(newItem);
+                    db.SaveChanges();
                 }
                 else
                 {
-                    newItem.PurchaseItemPrice = song.DiscountPrice;
-                }
-                newItem.PurchaseItemSong = song;
-                newItem.Purchase = NewPurchase;
-                db.PurchaseItems.Add(newItem);
-                db.SaveChanges();
-            }
+                    NewPurchase.PurchaseUser = db.Users.Find(CurrentUserId);
+                    NewPurchase.isPurchased = false;
+                    db.Purchases.Add(NewPurchase);
+                    db.SaveChanges();
+                    PurchaseList = query.ToList();
+                    NewPurchase = PurchaseList[0];
 
-            return RedirectToAction("Index", "Purchases");
+                    //TODOXX: IF for discounted price
+                    if (song.DiscountPrice.Equals(null))
+                    {
+                        newItem.PurchaseItemPrice = song.SongPrice;
+                    }
+                    else
+                    {
+                        newItem.PurchaseItemPrice = song.DiscountPrice;
+                    }
+                    newItem.PurchaseItemSong = song;
+                    newItem.Purchase = NewPurchase;
+                    db.PurchaseItems.Add(newItem);
+                    db.SaveChanges();
+                }
+            }
+                return RedirectToAction("Index", "Purchases");
+            
         }
 
         // GET: Songs/Create

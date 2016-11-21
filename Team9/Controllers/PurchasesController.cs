@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Team9.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Team9.Controllers
 {
@@ -17,7 +18,22 @@ namespace Team9.Controllers
         // GET: Purchases
         public ActionResult Index()
         {
-            return View(db.Purchases.ToList());
+            String CurrentUserId = User.Identity.GetUserId();
+            var query = from p in db.Purchases
+                        where p.isPurchased == false && p.PurchaseUser.Id == CurrentUserId
+                        select p;
+
+            List<Purchase> ActiveCartList = query.ToList();
+            if (ActiveCartList.Count() == 1 )
+            {
+                Purchase ActiveCartPurchase = new Purchase();
+                ActiveCartPurchase = ActiveCartList[0];
+                return View(ActiveCartPurchase.PurchaseItems.ToList());
+            }
+            else
+            {
+                return View(db.PurchaseItems.ToList());
+            }
         }
 
         // GET: Purchases/Details/5
@@ -27,12 +43,12 @@ namespace Team9.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Purchase purchase = db.Purchases.Find(id);
-            if (purchase == null)
+            PurchaseItem purchaseItem = db.PurchaseItems.Find(id);
+            if (purchaseItem == null)
             {
                 return HttpNotFound();
             }
-            return View(purchase);
+            return View(purchaseItem);
         }
 
         // GET: Purchases/Create
@@ -96,12 +112,12 @@ namespace Team9.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Purchase purchase = db.Purchases.Find(id);
-            if (purchase == null)
+            PurchaseItem purchaseItem = db.PurchaseItems.Find(id);
+            if (purchaseItem == null)
             {
                 return HttpNotFound();
             }
-            return View(purchase);
+            return View(purchaseItem);
         }
 
         // POST: Purchases/Delete/5
@@ -109,8 +125,8 @@ namespace Team9.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Purchase purchase = db.Purchases.Find(id);
-            db.Purchases.Remove(purchase);
+            PurchaseItem purchaseitem = db.PurchaseItems.Find(id);
+            db.PurchaseItems.Remove(purchaseitem);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

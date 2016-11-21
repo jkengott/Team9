@@ -14,6 +14,12 @@ namespace Team9.Controllers
     {
         private AppDbContext db = new AppDbContext();
 
+        //for search...
+        //var query = from p in db.purchases
+        //          join pi in db.purchaseitems on p.PurchaseID equals pi.purchase.purchaseID
+        //          where blah blah blah
+        //          select pi.PurchaseItemSong.SongID
+
         // GET: Artists
         public ActionResult Index()
         {
@@ -73,6 +79,7 @@ namespace Team9.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.AllGenres = GetAllGenres(@artist);
             return View(artist);
         }
 
@@ -81,14 +88,34 @@ namespace Team9.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ArtistID,ArtistName")] Artist artist)
+        public ActionResult Edit([Bind(Include = "ArtistID,ArtistName")] Artist artist, Int32[] SelectedGenres)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(artist).State = EntityState.Modified;
+                //find associated Artist
+                Artist artistToChange = db.Artists.Find(@artist.ArtistID);
+
+                //change Genres
+                //remove any existing genres
+                artistToChange.ArtistGenre.Clear();
+
+                //if there are events to add then add them
+                if (SelectedGenres != null)
+                {
+                    foreach (int GenreID in SelectedGenres)
+                    {
+                        Genre genreToAdd = db.Genres.Find(GenreID);
+                        artistToChange.ArtistGenre.Add(genreToAdd);
+                    }
+                }
+                artistToChange.ArtistName = @artist.ArtistName;                
+
+                db.Entry(artistToChange).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            //repopulate the viewbag
+            ViewBag.AllGenres = GetAllGenres(@artist);
             return View(artist);
         }
 
@@ -141,6 +168,30 @@ namespace Team9.Controllers
             }
 
             return average;
+        }
+        //gets all genres for drop dow list when editing
+        public MultiSelectList GetAllGenres(Artist @artist)
+        {
+            //populate list of Genres
+            var query = from g in db.Genres
+                        orderby g.GenreName
+                        select g;
+
+            //convert to list and execute query
+            List<Genre> allGenres = query.ToList();
+
+            //create list of selected Genres
+            List<Int32> SelectedGenres = new List<Int32>();
+
+            //Loop through list of Genres and add GenreID
+            foreach (Genre g in @artist.ArtistGenre)
+            {
+                SelectedGenres.Add(g.GenreID);
+            }
+            //convert to multiselect
+            MultiSelectList allGenresList = new MultiSelectList(allGenres, "GenreID", "GenreName", SelectedGenres);
+
+            return allGenresList;
         }
 
         protected override void Dispose(bool disposing)
