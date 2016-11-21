@@ -8,8 +8,21 @@
 <h2>Index</h2>
 
 <p>
+    @using (Html.BeginForm())
+    {
+    <p class="form-group">
+        Search: @Html.TextBox("AlbumString", null, new { @class = "form-control" }) <br />
+        <input type="submit" value="Search" class="btn btn-default" />
+        @Html.ActionLink("Advanced Search", "DetailedSearch", null, new { @class = "btn btn-default" })
+        @Html.ActionLink("Show All", "Index", null, new { @class = "btn btn-default" })
+    </p>
+    }
+
     @Html.ActionLink("Create New", "Create")
 </p>
+
+<p>Displaying @ViewBag.SelectedAlbumCount of @ViewBag.TotalAlbumCount <p />
+
 <table class="table">
     <tr>
         <th>
@@ -23,6 +36,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.AlbumGenre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AlbumRatings)
         </th>
 
         <th></th>
@@ -50,15 +66,23 @@
                     <span>@g.GenreName *</span>
                 }
             </td> 
+
+            <td>
+                @ViewBag.AverageAlbumRating
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.AlbumID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.AlbumID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.AlbumID })
+            </td>
+
+
+
+
         </tr>
 
 
-
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.AlbumID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.AlbumID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.AlbumID })
-        </td>
     }
 
 </table>

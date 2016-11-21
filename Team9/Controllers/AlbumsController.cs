@@ -41,9 +41,37 @@ namespace Team9.Controllers
         }
 
         // GET: Albums
-        public ActionResult Index()
+        public ActionResult Index(string AlbumString)
         {
-            return View(db.Albums.ToList());
+            var query = from a in db.Albums
+                        select a;
+
+            // Create a list of selected albums
+            List<Album> SelectedAlbums = new List<Album>();
+
+            //Create a view bag to store the number of selected albums
+            ViewBag.TotalAlbumCount = db.Albums.Count();
+
+            //Create selected count of customers
+            ViewBag.SelectedAlbumCount = db.Albums.Count();
+
+            if (AlbumString == null || AlbumString == "") // they didn't select anything
+            {
+                return View(db.Albums.ToList());
+            }
+            else //they picked something
+            {
+                //use linq to display searched names
+                SelectedAlbums = db.Albums.Where(a => a.AlbumName.Contains(AlbumString) || a.AlbumArtist.Any(r => r.ArtistName == AlbumString)).ToList();
+
+                //Create selected count of customers
+                ViewBag.SelectedAlbumCount = SelectedAlbums.Count();
+
+                //order the record to display sorted by lastname, first name, average sales
+                SelectedAlbums.OrderBy(a => a.AlbumName).ThenBy(a => a.AlbumPrice);
+                return View(SelectedAlbums);
+            }
+
         }
 
         // GET: Albums/Details/5
@@ -223,5 +251,11 @@ namespace Team9.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult AlbumDetailedSearch()
+        {
+            return View();
+        }
+
     }
 }
