@@ -137,7 +137,7 @@ namespace Team9.Controllers
                     {
                         PurchaseItem newItem = new PurchaseItem();
                         //Check if there is a discount price
-                        if (s.DiscountPrice.Equals(null))
+                        if (!s.isDiscoutned )
                         {
                             newItem.PurchaseItemPrice = s.SongPrice;
                         }
@@ -175,7 +175,7 @@ namespace Team9.Controllers
                     {
                         PurchaseItem newItem = new PurchaseItem();
                         //Check if discount price is null
-                        if (s.DiscountPrice.Equals(null))
+                        if (!s.isDiscoutned)
                         {
                             newItem.PurchaseItemPrice = s.SongPrice;
                         }

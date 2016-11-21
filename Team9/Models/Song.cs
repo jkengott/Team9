@@ -19,6 +19,8 @@ namespace Team9.Models
         [Required(ErrorMessage = "Please enter a valid price")]
         public Decimal SongPrice { get; set; }
 
+        public bool isDiscoutned { get; set; }
+
         public Decimal DiscountPrice { get; set; }
 
         [Required(ErrorMessage = "Please enter a valid length")]
