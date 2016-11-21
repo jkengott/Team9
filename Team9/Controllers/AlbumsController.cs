@@ -16,6 +16,22 @@ namespace Team9.Controllers
     {
         private AppDbContext db = new AppDbContext();
 
+        public bool hasPurchased(int id)
+        {
+            String CurrentUserId = User.Identity.GetUserId();
+            var query = from p in db.Purchases
+                        join pi in db.PurchaseItems on p.PurchaseID equals pi.Purchase.PurchaseID
+                        where p.isPurchased == false && p.PurchaseUser.Id == CurrentUserId
+                        select pi.PurchaseItemSong.SongID;
+
+            List<Int32> SongIDs = query.ToList();
+            if (SongIDs.Contains(id))
+            {
+                return true;
+            }
+            return false;
+        }
+
         public Decimal getAverageRating(int? id)
         {
             Decimal count = 0;
@@ -83,19 +99,30 @@ namespace Team9.Controllers
                 //newItem.PurchaseItemPrice = song.SongPrice;
                 foreach (Song s in album.Songs)
                 {
-                    PurchaseItem newItem = new PurchaseItem();
-                    if (s.DiscountPrice.Equals(null))
-                {
-                    newItem.PurchaseItemPrice = s.SongPrice;
-                }
-                else
-                {
-                    newItem.PurchaseItemPrice = s.DiscountPrice;
-                }
-                newItem.PurchaseItemSong = s;
-                newItem.Purchase = NewPurchase;
-                db.PurchaseItems.Add(newItem);
-                db.SaveChanges();
+                    if (hasPurchased(s.SongID))
+                    {
+                        continue;
+                        //TODO:Error message to not add song?
+                        // use a next to add all other songs that have not been added?
+                    }
+                    else
+                    {
+                        PurchaseItem newItem = new PurchaseItem();
+                        //Check if there is a discount price
+                        if (s.DiscountPrice.Equals(null))
+                        {
+                            newItem.PurchaseItemPrice = s.SongPrice;
+                        }
+                        else
+                        {
+                            newItem.PurchaseItemPrice = s.DiscountPrice;
+                        }
+                        newItem.PurchaseItemSong = s;
+                        newItem.Purchase = NewPurchase;
+                        db.PurchaseItems.Add(newItem);
+                        db.SaveChanges();
+
+                    }
                 }
             }
             else
@@ -111,22 +138,30 @@ namespace Team9.Controllers
 
                 foreach (Song s in album.Songs)
                 {
-                    PurchaseItem newItem = new PurchaseItem();
-                    if (s.DiscountPrice.Equals(null))
+                    if (hasPurchased(s.SongID))
                     {
-                        newItem.PurchaseItemPrice = s.SongPrice;
+                        //TODO:Error message to not add song?
+                        // use a next to add all other songs that have not been added?
                     }
                     else
                     {
-                        newItem.PurchaseItemPrice = s.DiscountPrice;
+                        PurchaseItem newItem = new PurchaseItem();
+                        //Check if discount price is null
+                        if (s.DiscountPrice.Equals(null))
+                        {
+                            newItem.PurchaseItemPrice = s.SongPrice;
+                        }
+                        else
+                        {
+                            newItem.PurchaseItemPrice = s.DiscountPrice;
+                        }
+                        newItem.PurchaseItemSong = s;
+                        newItem.Purchase = NewPurchase;
+                        db.PurchaseItems.Add(newItem);
+                        db.SaveChanges();
                     }
-                    newItem.PurchaseItemSong = s;
-                    newItem.Purchase = NewPurchase;
-                    db.PurchaseItems.Add(newItem);
-                    db.SaveChanges();
                 }
             }
-
             return RedirectToAction("Index", "Purchases");
         }
 

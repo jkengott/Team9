@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Team9.Models.PurchaseItem>
+    @using Team9.Models
 
 @{
     ViewBag.Title = "Index";
@@ -15,7 +16,7 @@
             @Html.DisplayNameFor(model => model.PurchaseItemSong.SongName )
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PurchaseItemSong.SongAlbum )
+            @Html.DisplayNameFor(model => model.PurchaseItemSong.SongAlbum.AlbumName )
         </th>
         <th>
             @Html.DisplayNameFor(model => model.PurchaseItemSong.SongArtist )
@@ -36,11 +37,15 @@
             @Html.DisplayFor(modelItem => item.PurchaseItemSong.SongName )
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.PurchaseItemSong.SongAlbum )
+            @Html.DisplayFor(modelItem => item.PurchaseItemSong.SongAlbum.AlbumName )
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.PurchaseItemSong.SongArtist )
+            @foreach (Artist a in item.PurchaseItemSong.SongArtist )
+                {
+                <span>@a.ArtistName *</span>
+            }
         </td>
+        
         <td>
             @Html.DisplayFor(modelItem => item.PurchaseItemSong.SongGenre )
         </td>
@@ -49,11 +54,9 @@
         </td>
 
 
-
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PurchaseID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PurchaseID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PurchaseID })
+            @Html.ActionLink("Details", "Details", new { id=item.PurchaseItemID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PurchaseItemID })
         </td>
     </tr>
 }

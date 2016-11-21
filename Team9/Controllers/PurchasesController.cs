@@ -32,7 +32,7 @@ namespace Team9.Controllers
             }
             else
             {
-                return View(db.Purchases.ToList());
+                return View(db.PurchaseItems.ToList());
             }
         }
 
@@ -43,12 +43,12 @@ namespace Team9.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Purchase purchase = db.Purchases.Find(id);
-            if (purchase == null)
+            PurchaseItem purchaseItem = db.PurchaseItems.Find(id);
+            if (purchaseItem == null)
             {
                 return HttpNotFound();
             }
-            return View(purchase);
+            return View(purchaseItem);
         }
 
         // GET: Purchases/Create
@@ -112,12 +112,12 @@ namespace Team9.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Purchase purchase = db.Purchases.Find(id);
-            if (purchase == null)
+            PurchaseItem purchaseItem = db.PurchaseItems.Find(id);
+            if (purchaseItem == null)
             {
                 return HttpNotFound();
             }
-            return View(purchase);
+            return View(purchaseItem);
         }
 
         // POST: Purchases/Delete/5
@@ -125,8 +125,8 @@ namespace Team9.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Purchase purchase = db.Purchases.Find(id);
-            db.Purchases.Remove(purchase);
+            PurchaseItem purchaseitem = db.PurchaseItems.Find(id);
+            db.PurchaseItems.Remove(purchaseitem);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
