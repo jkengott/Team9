@@ -1,4 +1,5 @@
-﻿//TODOXX: Change the using statement here to match your project's name
+﻿//This is a new comment
+//TODOXX: Change the using statement here to match your project's name
 using Team9.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
