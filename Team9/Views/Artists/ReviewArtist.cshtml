@@ -1,0 +1,62 @@
+﻿@model Team9.Models.Artist
+@{
+    ViewBag.Title = "ReviewArtist";
+}
+
+<h2>ReviewArtist</h2>
+
+<h2>Review @Html.DisplayFor(model => model.ArtistName)</h2>
+
+
+<div>
+    <hr />
+    <dl>
+        <dt>
+            Rating
+        </dt>
+        <dd>
+                <label class="form-check-label">
+                    @Html.RadioButton("1", new { @class = "form-check-input" })  1
+                </label>
+        </dd>
+        <dd>
+            <div class="form-check">
+                <label class="form-check-label">
+                    @Html.RadioButton("1", new { @class = "form-check-input" })  2
+                </label>
+            </div>
+        </dd>
+        <dd>
+            <div class="form-check">
+                <label class="form-check-label">
+                    @Html.RadioButton("1", new { @class = "form-check-input" })  3
+                </label>
+            </div>
+        </dd>
+        <dd>
+            <div class="form-check">
+                <label class="form-check-label">
+                    @Html.RadioButton("1", new { @class = "form-check-input" })  4
+                </label>
+            </div>
+        </dd>
+        <dd>
+            <div class="form-check">
+                <label class="form-check-label">
+                    @Html.RadioButton("1", new { @class = "form-check-input" })  5
+
+
+                </label>
+            </div>
+        </dd>
+    </dl>
+    <hr />
+    <dl>
+        <dt>
+            Comments
+        </dt>
+        <dd>
+            @Html.TextArea("Comments", null, new { @class = "form-control" }) <br />
+        </dd>
+    </dl>
+</div>

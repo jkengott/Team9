@@ -300,6 +300,8 @@
     <Content Include="Views\Ratings\Edit.cshtml" />
     <Content Include="Views\Ratings\Index.cshtml" />
     <Content Include="Views\Albums\AlbumDetailedSearch.cshtml" />
+    <Content Include="Views\Artists\DetailedSearch.cshtml" />
+    <Content Include="Views\Artists\ReviewArtist.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
