@@ -245,6 +245,14 @@
     <Compile Include="Migrations\201611211741487_Team9.11.Designer.cs">
       <DependentUpon>201611211741487_Team9.11.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611231743541_Team9.12.cs" />
+    <Compile Include="Migrations\201611231743541_Team9.12.Designer.cs">
+      <DependentUpon>201611231743541_Team9.12.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611231808157_Team9.13.cs" />
+    <Compile Include="Migrations\201611231808157_Team9.13.Designer.cs">
+      <DependentUpon>201611231808157_Team9.13.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Artist.cs" />
     <Compile Include="Models\Album.cs" />
@@ -346,6 +354,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611211741487_Team9.11.resx">
       <DependentUpon>201611211741487_Team9.11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611231743541_Team9.12.resx">
+      <DependentUpon>201611231743541_Team9.12.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611231808157_Team9.13.resx">
+      <DependentUpon>201611231808157_Team9.13.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

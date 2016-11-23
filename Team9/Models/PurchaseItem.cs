@@ -11,7 +11,11 @@ namespace Team9.Models
 
         public Decimal PurchaseItemPrice { get; set; }
 
-        public virtual  Song PurchaseItemSong { get; set; }
+        public bool isAlbum { get; set; }
+
+        public virtual Song PurchaseItemSong { get; set; }
+
+        public virtual Album PurchaseItemAlbum {get; set; }
 
         public virtual Purchase Purchase { get; set; }
 

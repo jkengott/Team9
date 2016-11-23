@@ -24,8 +24,15 @@ namespace Team9.Controllers
                         where p.isPurchased == false && p.PurchaseUser.Id == CurrentUserId
                         select pi.PurchaseItemSong.SongID;
 
+            var query2 = from p in db.Purchases
+                         join pi in db.PurchaseItems on p.PurchaseID equals pi.Purchase.PurchaseID
+                         where p.isPurchased == false && p.PurchaseUser.Id == CurrentUserId
+                         select pi.PurchaseItemAlbum.AlbumID;
+
             List<Int32> SongIDs = query.ToList();
-            if (SongIDs.Contains(id))
+            List<Int32> AlbumIDs = query2.ToList();
+            //List<Int32> AlbumSongs = new List<Int32>();
+            if (AlbumIDs.Contains(id))
             {
                 return true;
             }
@@ -125,11 +132,11 @@ namespace Team9.Controllers
 
                 //TODOXX: IF for discounted price
                 //newItem.PurchaseItemPrice = song.SongPrice;
-                foreach (Song s in album.Songs)
-                {
-                    if (hasPurchased(s.SongID))
+                //foreach (Song s in album.Songs)
+                //{
+                    if (hasPurchased(album.AlbumID))
                     {
-                        continue;
+                        //continue;
                         //TODO:Error message to not add song?
                         // use a next to add all other songs that have not been added?
                     }
@@ -137,21 +144,21 @@ namespace Team9.Controllers
                     {
                         PurchaseItem newItem = new PurchaseItem();
                         //Check if there is a discount price
-                        if (!s.isDiscoutned )
+                        if (!album.isDiscounted )
                         {
-                            newItem.PurchaseItemPrice = s.SongPrice;
+                            newItem.PurchaseItemPrice = album.AlbumPrice;
                         }
                         else
                         {
-                            newItem.PurchaseItemPrice = s.DiscountPrice;
+                            newItem.PurchaseItemPrice = album.DiscountAlbumPrice ;
                         }
-                        newItem.PurchaseItemSong = s;
+                        newItem.PurchaseItemAlbum = album;
                         newItem.Purchase = NewPurchase;
                         db.PurchaseItems.Add(newItem);
                         db.SaveChanges();
 
                     }
-                }
+                //}
             }
             else
             {
@@ -164,9 +171,9 @@ namespace Team9.Controllers
 
                 //TODOXX: IF for discounted price
 
-                foreach (Song s in album.Songs)
-                {
-                    if (hasPurchased(s.SongID))
+                //foreach (Song s in album.Songs)
+                //{
+                    if (hasPurchased(album.AlbumID ))
                     {
                         //TODO:Error message to not add song?
                         // use a next to add all other songs that have not been added?
@@ -175,20 +182,20 @@ namespace Team9.Controllers
                     {
                         PurchaseItem newItem = new PurchaseItem();
                         //Check if discount price is null
-                        if (!s.isDiscoutned)
+                        if (!album.isDiscounted )
                         {
-                            newItem.PurchaseItemPrice = s.SongPrice;
+                            newItem.PurchaseItemPrice = album.AlbumPrice ;
                         }
                         else
                         {
-                            newItem.PurchaseItemPrice = s.DiscountPrice;
+                            newItem.PurchaseItemPrice = album.DiscountAlbumPrice ;
                         }
-                        newItem.PurchaseItemSong = s;
+                        newItem.PurchaseItemAlbum = album;
                         newItem.Purchase = NewPurchase;
                         db.PurchaseItems.Add(newItem);
                         db.SaveChanges();
                     }
-                }
+                //}
             }
             return RedirectToAction("Index", "Purchases");
         }
