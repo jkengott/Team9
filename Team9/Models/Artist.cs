@@ -21,10 +21,10 @@ namespace Team9.Models
 
         public virtual List<Genre> ArtistGenre { get; set; }
 
-        public virtual List<Song> Songs { get; set; }
+        
 
         public virtual List<Rating> ArtistRatings { get; set; }
 
-        public virtual List<Album> ArtistAlbums { get; set; }
+        
     }
 }
