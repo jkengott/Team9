@@ -21,9 +21,77 @@ namespace Team9.Controllers
         //          select pi.PurchaseItemSong.SongID
 
         // GET: Artists
-        public ActionResult Index()
+        public ActionResult Index(string SearchString)
         {
-            return View(db.Artists.ToList());
+            //create a view bag to store the number of selected customers
+            ViewBag.TotalArtistCount = db.Artists.Count();
+
+            //create a list of selected customers
+            List<Artist> SelectedArtists = new List<Artist>();
+
+            // create count of selected customers
+            ViewBag.SelectedArtistCount = db.Artists.Count();
+
+
+            if (SearchString == null || SearchString == "") //didnt select anything
+            {
+                return View(db.Artists.ToList());
+            }
+            else //something was picked
+            {
+                //linq to display searched name
+                SelectedArtists = db.Artists.Where(c => c.ArtistName.Contains(SearchString)).ToList();
+
+                int SelectedArtistCount = SelectedArtists.Count();
+
+                // create count of selected artists
+                ViewBag.SelectedArtistCount = SelectedArtists.Count();
+
+                //order by artists name then average rating
+                //TODO: Order by avg rating when we figure that out
+                SelectedArtists.OrderBy(c => c.ArtistName);
+                //return view with selected artists
+                return View(SelectedArtists);
+            }
+        }
+        public ActionResult DetailedSearch()
+        {
+            ViewBag.AllGenres = GetAllGenres();
+            return View();
+        }
+
+        //Detailed search results
+        public ActionResult SearchResults(String NameString, Int32 SelectedGenre)
+        {
+            //create a new db set of customers for searching
+            var query = from a in db.Artists
+                        select a;
+
+            //NameString is from the name search
+            if (NameString != null || NameString != "") //Something was actually inputed
+            {
+                query = query.Where(a => a.ArtistName.Contains(NameString));
+            }
+
+            //one was chosen
+            if (SelectedGenre != 0)
+            {
+                ViewBag.AllGenres = GetAllGenres();
+
+            }
+
+
+
+
+            List<Artist> SelectedArtists = query.ToList();
+
+            //count selected customers
+            ViewBag.SelectedArtistCount = SelectedArtists.Count();
+
+            //to display total number of customers
+            ViewBag.TotalArtistCount = db.Artists.Count();
+
+            return View("Index", SelectedArtists);
         }
 
         // GET: Artists/Details/5
@@ -88,9 +156,9 @@ namespace Team9.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ArtistID,ArtistName")] Artist artist, Int32[] SelectedGenres)
+        public ActionResult Edit([Bind(Include = "ArtistID,ArtistName")] Artist artist, int[] SelectedGenres)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) // NOT CATCHING AS VALID!!!!
             {
                 //find associated Artist
                 Artist artistToChange = db.Artists.Find(@artist.ArtistID);
@@ -116,7 +184,7 @@ namespace Team9.Controllers
             }
             //repopulate the viewbag
             ViewBag.AllGenres = GetAllGenres(@artist);
-            return View(artist);
+            return View(@artist);
         }
 
         // GET: Artists/Delete/5
@@ -144,6 +212,25 @@ namespace Team9.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        // GET: Artists/ReviewArtist/5
+        public ActionResult ReviewArtist(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Artist artist = db.Artists.Find(id);
+            if (artist == null)
+            {
+                return HttpNotFound();
+            }
+            return View(artist);
+        }
+
+        // POST: Artists/ReviewArtist/5
+        //TODO: creat the post method
+        //######################################################//
 
         // gets the average rating for an artist
         public Decimal getAverageRating(int? id)
@@ -192,6 +279,18 @@ namespace Team9.Controllers
             MultiSelectList allGenresList = new MultiSelectList(allGenres, "GenreID", "GenreName", SelectedGenres);
 
             return allGenresList;
+        }
+        //get a list of all the genres FOR DROP DOWN LIST NOT MULTISELECT LIST
+        public SelectList GetAllGenres()
+        {
+            var query = from g in db.Genres
+                        select g;
+
+            List<Genre> allGenre = query.ToList();
+
+            SelectList GenreList = new SelectList(allGenre.OrderBy(g => g.GenreName), "GenreID", "Name");
+
+            return GenreList;
         }
 
         protected override void Dispose(bool disposing)

@@ -11,10 +11,6 @@ namespace Team9.Models
 
         public string GenreName { get; set; }
 
-        public virtual List<Artist> Artists { get; set; }
-
-        public virtual List<Song> Songs { get; set; }
-
-        public virtual List<Album> Albums { get; set; }
+        
     }
 }

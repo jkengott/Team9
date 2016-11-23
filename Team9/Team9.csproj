@@ -245,6 +245,7 @@
     <Compile Include="Migrations\201611211741487_Team9.11.Designer.cs">
       <DependentUpon>201611211741487_Team9.11.cs</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="Migrations\201611231743541_Team9.12.cs" />
     <Compile Include="Migrations\201611231743541_Team9.12.Designer.cs">
       <DependentUpon>201611231743541_Team9.12.cs</DependentUpon>
@@ -252,6 +253,11 @@
     <Compile Include="Migrations\201611231808157_Team9.13.cs" />
     <Compile Include="Migrations\201611231808157_Team9.13.Designer.cs">
       <DependentUpon>201611231808157_Team9.13.cs</DependentUpon>
+=======
+    <Compile Include="Migrations\201611231740179_Team9.12.cs" />
+    <Compile Include="Migrations\201611231740179_Team9.12.Designer.cs">
+      <DependentUpon>201611231740179_Team9.12.cs</DependentUpon>
+>>>>>>> origin/master
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Artist.cs" />
@@ -308,6 +314,8 @@
     <Content Include="Views\Ratings\Edit.cshtml" />
     <Content Include="Views\Ratings\Index.cshtml" />
     <Content Include="Views\Albums\AlbumDetailedSearch.cshtml" />
+    <Content Include="Views\Artists\DetailedSearch.cshtml" />
+    <Content Include="Views\Artists\ReviewArtist.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -355,11 +363,16 @@
     <EmbeddedResource Include="Migrations\201611211741487_Team9.11.resx">
       <DependentUpon>201611211741487_Team9.11.cs</DependentUpon>
     </EmbeddedResource>
+<<<<<<< HEAD
     <EmbeddedResource Include="Migrations\201611231743541_Team9.12.resx">
       <DependentUpon>201611231743541_Team9.12.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611231808157_Team9.13.resx">
       <DependentUpon>201611231808157_Team9.13.cs</DependentUpon>
+=======
+    <EmbeddedResource Include="Migrations\201611231740179_Team9.12.resx">
+      <DependentUpon>201611231740179_Team9.12.cs</DependentUpon>
+>>>>>>> origin/master
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
